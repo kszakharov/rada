@@ -1,4 +1,4 @@
-# rada
+# rada<sup>🇺🇦</sup>
 
 A minimal Swift CLI that runs prompts through Apple's on-device Foundation Models framework — no network, no API keys, just local inference on macOS 26+.
 
