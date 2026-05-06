@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set version
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            BASE=$(git describe --tags --abbrev=0)
+            VERSION="${BASE#v}-dev-${GITHUB_SHA::7}"
+          else
+            VERSION=${GITHUB_REF_NAME#v}
+          fi
+
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Build
+        run: swift build -c release
+
+      - name: Make tarball
+        run: |
+          tar -czf rada_${{ env.VERSION }}.tar.gz \
+            -C . CHANGELOG.md \
+            -C . LICENSE \
+            -C . README.md \
+            -C .build/release rada
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: rada_${{ env.VERSION }}.tar.gz
+          archive: false
