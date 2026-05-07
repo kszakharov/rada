@@ -15,13 +15,8 @@ jobs:
 
       - name: Set version
         run: |
-          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
-            BASE=$(git describe --tags --abbrev=0)
-            VERSION="${BASE#v}-dev-${GITHUB_SHA::7}"
-          else
-            VERSION=${GITHUB_REF_NAME#v}
-          fi
-
+          VERSION=$(git describe --always --dirty --tags)
+          VERSION=${VERSION#v}
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build
