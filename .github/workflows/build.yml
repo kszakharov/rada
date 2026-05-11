@@ -20,7 +20,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build
-        run: swift build -c release
+        run: make build
 
       - name: Make tarball
         run: |
