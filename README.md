@@ -11,7 +11,7 @@ A minimal Swift CLI that runs prompts through Apple's on-device Foundation Model
 
 ### Build from source
 
-```sh
+```shell
 git clone https://github.com/kszakharov/rada.git
 cd rada
 swift build -c release
@@ -20,12 +20,30 @@ cp .build/release/rada /usr/local/bin/rada
 
 ## Usage
 
-Pass a prompt as an argument:
+`rada` supports multiple input modes:
 
-```sh
+**Argument:**
+```shell
 rada "What is the capital of Ukraine?"
+The capital of Ukraine is Kyiv.
+```
 
-Response:
+**Option:**
+```shell
+rada --prompt "What is the capital of Ukraine?"
+The capital of Ukraine is Kyiv.
+```
+
+**Interactive (REPL):**
+```shell
+rada
+>>> What is the capital of Ukraine?
+The capital of Ukraine is Kyiv.
+```
+
+**Pipe:**
+```shell
+echo "What is the capital of Ukraine?" | rada
 The capital of Ukraine is Kyiv.
 ```
 
