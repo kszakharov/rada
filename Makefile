@@ -4,10 +4,15 @@
 VERSION := $(shell git describe --always --tags --dirty)
 VERSION_FILE = Sources/rada/Version.swift
 
+PREFIX ?= /usr/local
+BINARY_NAME := rada
+
 
 help:
 	@echo "Available targets:"
 	@echo "  build          Build the project"
+	@echo "  install        Install the binary"
+	@echo "  uninstall      Uninstall the binary"
 	@echo "  format         Format code"
 	@echo "  lint           Run linter"
 	@echo "  set-version    Update version file with current git version"
@@ -16,6 +21,13 @@ help:
 build: set-version
 	@trap '$(MAKE) unset-version' EXIT; \
 	swift build --configuration release
+
+install:
+	install -d $(PREFIX)/bin
+	install .build/release/$(BINARY_NAME) $(PREFIX)/bin/$(BINARY_NAME)
+
+uninstall:
+	rm -f $(PREFIX)/bin/$(BINARY_NAME)
 
 format:
 	swift format format . --in-place --parallel --recursive

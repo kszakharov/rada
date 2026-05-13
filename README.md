@@ -14,8 +14,8 @@ A minimal Swift CLI that runs prompts through Apple's on-device Foundation Model
 ```shell
 git clone https://github.com/kszakharov/rada.git
 cd rada
-swift build -c release
-cp .build/release/rada /usr/local/bin/rada
+make build
+make install
 ```
 
 ## Usage
