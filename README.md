@@ -9,6 +9,12 @@ A minimal Swift CLI that runs prompts through Apple's on-device Foundation Model
 
 ## Installation
 
+### Homebrew
+
+```sh
+brew install kszakharov/tap/rada
+```
+
 ### Build from source
 
 ```shell
