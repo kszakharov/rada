@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-05-31
+
+### Added
+- Homebrew installation via `brew install kszakharov/tap/rada`
+- `--prompt` / `-p` option as an alternative to positional argument
+- `--check` flag to verify Foundation Models availability
+- `--version` flag
+- Pipe/stdin support (`echo "..." | rada`)
+- Interactive REPL mode (`>>>`) when no prompt is provided
+- `make install` / `make uninstall` for installing the binary from source
+
+### Fixed
+- Version string now correctly derived via `git describe` in all build scenarios
+
 ## [0.1.0] - 2026-05-06
 
 ### Added
