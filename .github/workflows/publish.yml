@@ -1,0 +1,24 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  published-to-homebrew:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger autobump workflow
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          RUN_URL=$(
+            gh workflow run autobump.yml \
+              --repo kszakharov/homebrew-tap \
+              -f formulae="${{ github.event.repository.name }}"
+          )
+          RUN_ID=$(basename "$RUN_URL")
+          echo "$RUN_URL"
+
+          gh run watch --repo kszakharov/homebrew-tap "$RUN_ID" --exit-status
