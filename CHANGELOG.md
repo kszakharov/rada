@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2026-06-01
+
+### Fixed
+
+- Builds outside Git repositories (fixes Homebrew installs)
+
 ## [0.2.0] - 2026-05-31
 
 ### Added
