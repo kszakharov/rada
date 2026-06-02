@@ -58,9 +58,14 @@ struct CLI: AsyncParsableCommand {
 
     let stream = session.streamResponse(to: resolvedPrompt)
 
+    var previousLength = 0
     for try await partial in stream {
-      print(partial.content, terminator: "")
-      fflush(stdout)
+      let delta = String(partial.content.dropFirst(previousLength))
+      if !delta.isEmpty {
+        print(delta, terminator: "")
+        fflush(stdout)
+      }
+      previousLength = partial.content.count
     }
 
     print()
