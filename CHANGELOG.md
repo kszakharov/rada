@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [0.2.0] - 2026-05-31
 
 ### Added
+
 - Homebrew installation via `brew install kszakharov/tap/rada`
 - `--prompt` / `-p` option as an alternative to positional argument
 - `--check` flag to verify Foundation Models availability
@@ -14,11 +15,13 @@ All notable changes to this project will be documented in this file.
 - `make install` / `make uninstall` for installing the binary from source
 
 ### Fixed
+
 - Version string now correctly derived via `git describe` in all build scenarios
 
 ## [0.1.0] - 2026-05-06
 
 ### Added
+
 - Initial release of the CLI tool.
 - Support for reading prompts from command-line arguments or standard input.
 - Availability check with a clear error message when Foundation Models is unavailable.
