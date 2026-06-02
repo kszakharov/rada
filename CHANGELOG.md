@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2026-06-02
+
+### Fixed
+
+- Streaming output now prints incremental tokens instead of full accumulated content
+
 ## [0.2.1] - 2026-06-01
 
 ### Fixed
