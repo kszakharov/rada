@@ -1,8 +1,10 @@
 .DEFAULT_GOAL := help
-.PHONY: help build format lint set-version unset-version
+.PHONY: help build install uninstall format lint set-version unset-version
 
-VERSION := $(shell git describe --always --tags --dirty)
+VERSION ?= $(shell git describe --always --tags --dirty)
 VERSION_FILE = Sources/rada/Version.swift
+
+IS_GIT_REPO := $(shell git rev-parse --is-inside-work-tree 2>/dev/null)
 
 PREFIX ?= /usr/local
 BINARY_NAME := rada
@@ -36,11 +38,15 @@ lint:
 	swift format lint . --parallel --recursive --strict
 
 set-version:
+ifeq ($(IS_GIT_REPO),true)
 	@# avoid tracking changes for file:
 	@git update-index --assume-unchanged $(VERSION_FILE)
+endif
 	@echo VERSION: $(VERSION)
 	@printf 'public let appVersion = "%s"\n' "$(VERSION)" > $(VERSION_FILE)
 
 unset-version:
+ifeq ($(IS_GIT_REPO),true)
 	@git update-index --no-assume-unchanged $(VERSION_FILE)
 	@git restore $(VERSION_FILE)
+endif
