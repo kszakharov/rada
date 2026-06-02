@@ -52,3 +52,4 @@ jobs:
           body: ${{ steps.changelog.outputs.release_notes }}
           files: dist/*
           generate_release_notes: false
+          token: ${{ secrets.GH_TOKEN }}
